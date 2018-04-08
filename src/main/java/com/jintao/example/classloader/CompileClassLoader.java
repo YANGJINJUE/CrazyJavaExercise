@@ -3,6 +3,8 @@ package com.jintao.example.classloader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Created with IDEA
@@ -95,5 +97,30 @@ public class CompileClassLoader extends ClassLoader {
         }
 
         return clazz;
+    }
+
+    //定义一个主方法
+    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        //如果运行该程序时没有参数，即无目标类
+
+        if(args.length < 0){
+            System.out.println("缺少目标类，请按如下格式运行Java源文件: ");
+            System.out.println("java CompileClassLoader ClassName");
+        }
+
+        //第一个参数是需要运行的类
+        String progClass = args[0];
+        //剩下的将作为运行目标类时的参数
+        //将这些参数复制到一个新数组中
+        String progArgs[] = new String[args.length -1];
+        System.arraycopy(args,1,progArgs,0,progArgs.length);
+        CompileClassLoader ccl = new CompileClassLoader();
+        //加载需要运行的类
+        Class<?> clazz =  ccl.loadClass(progClass);
+        //获取需要运行类的主方法
+        Method main = clazz.getMethod("main",(new String[0]).getClass());
+        Object argsArray = progArgs;
+        main.invoke(argsArray);
+
     }
 }
