@@ -8,3 +8,8 @@ package com.jintao.example.classloader;
  */
 public class CompileClassLoader extends ClassLoader {
 }
+
+
+/**
+ * 创建使用自定义的类加载器
+ **/
