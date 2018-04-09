@@ -7,13 +7,15 @@ package com.jintao.example.classloader;
  * Time:14:39
  */
 
-class MyTest{
+class MyTest {
     static {
         System.out.println("静态初始化代码块.....");
     }
+
     static final String compileConstant = "常量";
     static final String dynamicConstant = System.currentTimeMillis() + "常量";
 }
+
 public class FinalTest {
     public static void main(String[] args) {
         System.out.println(MyTest.compileConstant);
