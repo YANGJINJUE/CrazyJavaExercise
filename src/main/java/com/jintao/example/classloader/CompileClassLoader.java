@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+//https://blog.csdn.net/seu_calvin/article/details/52315125
+//推荐博客地址自定义类加载器
+
 /**
  * Created with IDEA
  * author:jinjueYang
@@ -63,8 +66,9 @@ public class CompileClassLoader extends ClassLoader {
         Class clazz = null;
         //将包路径中的.替换成/
         String fileStub = name.replace(".","/");
-        String javaFileName = fileStub + ".java";
-        String classFileName = fileStub + ".class";
+        String prePath = "src/main/java/";
+        String javaFileName = prePath + fileStub + ".java";
+        String classFileName = prePath + fileStub + ".class";
         File javaFile = new File(javaFileName);
         File classFile = new File(classFileName);
         //当指定源文件存在，且Class文件不存在，或者Java源文件的修改时间
@@ -102,8 +106,10 @@ public class CompileClassLoader extends ClassLoader {
     //定义一个主方法
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         //如果运行该程序时没有参数，即无目标类
-
-        if(args.length < 0){
+        args = new String [2];
+        args[0] = "com.jintao.example.classloader.FinalTest";
+        args[1] = "aa";
+        if(args.length < 1){
             System.out.println("缺少目标类，请按如下格式运行Java源文件: ");
             System.out.println("java CompileClassLoader ClassName");
         }
@@ -119,8 +125,8 @@ public class CompileClassLoader extends ClassLoader {
         Class<?> clazz =  ccl.loadClass(progClass);
         //获取需要运行类的主方法
         Method main = clazz.getMethod("main",(new String[0]).getClass());
-        Object argsArray = progArgs;
-        main.invoke(argsArray);
+        Object argsArray[] = {progArgs};
+        main.invoke(null,argsArray);
 
     }
 }
