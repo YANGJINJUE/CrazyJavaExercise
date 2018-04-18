@@ -8,6 +8,7 @@ import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
 /***
+ * 使用前务必把netty的3.x打开
  * 可以在命令行里 telnet 127.0.0.1 8099
  * 然后输入一些字符，观察服务端的控制台日志
  * 不建议使用3.x的版本，以后测试采用4.x版本以上
