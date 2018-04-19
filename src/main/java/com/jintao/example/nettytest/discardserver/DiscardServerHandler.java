@@ -1,4 +1,4 @@
-package com.jintao.example.nettytest;
+package com.jintao.example.nettytest.discardserver;
 
 /**
  * Created with IDEA
