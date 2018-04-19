@@ -7,7 +7,6 @@ package com.jintao.example.nettytest.discardserver;
  * Time:13:50
  */
 
-import com.jintao.example.nettytest.echoserver.EchoServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
