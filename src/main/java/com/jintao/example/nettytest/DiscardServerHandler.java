@@ -23,7 +23,7 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter {
         try {
 //            System.out.print((char) in.readByte());
             System.out.print(in.toString(CharsetUtil.US_ASCII));
-            System.out.flush();
+            System.out.flush();//可保证输出立即打印
         } finally {
 //            ReferenceCountUtil.release(msg);
             in.release();
