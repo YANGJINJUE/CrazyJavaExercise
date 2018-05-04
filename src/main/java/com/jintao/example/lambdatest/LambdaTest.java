@@ -27,6 +27,7 @@ public class LambdaTest {
 
         //java8之后
         new Thread(() -> System.out.println("In Java8, Lambda expression rocks !!")).start();
+        new Thread(() -> testList()).start();
     }
 
     @Test
