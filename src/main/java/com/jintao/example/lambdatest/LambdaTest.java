@@ -102,12 +102,12 @@ public class LambdaTest {
 
         Arrays.stream(numbers.toArray()).forEach(System.out::println);
         // max and OptionalInt
-        OptionalInt maxCalories = menu.stream()
-                .mapToInt(Dish::getCalories)
-                .max();
+        OptionalInt maxCalories = menu.stream().mapToInt(Dish::getCalories).max();
+
+        int maxInt = menu.stream().map(dish -> dish.getCalories()).sorted(Comparator.reverseOrder()).collect(Collectors.toList()).get(0);
+
         System.out.println("Number of calories:" + maxCalories);
-        int maxInt =  menu.stream().map(dish->dish.getCalories()).sorted(Comparator.reverseOrder()).collect(Collectors.toList()).get(0);
-        System.out.println(maxCalories.getAsInt());
+        System.out.println("Number of calories:" + maxCalories.getAsInt());
         System.out.println(maxInt);
     }
 
