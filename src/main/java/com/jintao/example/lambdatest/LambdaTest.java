@@ -3,8 +3,11 @@ package com.jintao.example.lambdatest;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.OptionalInt;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * 参考文档 http://www.importnew.com/16436.html
@@ -83,6 +86,29 @@ public class LambdaTest {
 
     public static void filter2(List<String> names, Predicate condition) {
         names.stream().filter(name -> condition.test(name)).forEach(System.out::println);
+    }
+
+    @Test
+    public void testMapToInt() {
+        List<Dish> menu =
+                Arrays.asList(new Dish("pork", false, 800, Dish.Type.MEAT),
+                        new Dish("beef", false, 700, Dish.Type.MEAT),
+                        new Dish("chicken", false, 400, Dish.Type.MEAT),
+                        new Dish("rice", true, 350, Dish.Type.OTHER),
+                        new Dish("pizza", true, 550, Dish.Type.OTHER),
+                        new Dish("prawns", false, 400, Dish.Type.FISH),
+                        new Dish("salmon", false, 450, Dish.Type.FISH));
+        List<Integer> numbers = Arrays.asList(3, 4, 5, 1, 2);
+
+        Arrays.stream(numbers.toArray()).forEach(System.out::println);
+        // max and OptionalInt
+        OptionalInt maxCalories = menu.stream()
+                .mapToInt(Dish::getCalories)
+                .max();
+        System.out.println("Number of calories:" + maxCalories);
+        int maxInt =  menu.stream().map(dish->dish.getCalories()).sorted(Comparator.reverseOrder()).collect(Collectors.toList()).get(0);
+        System.out.println(maxCalories.getAsInt());
+        System.out.println(maxInt);
     }
 
 }
