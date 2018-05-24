@@ -101,6 +101,8 @@ public class LambdaTest {
         List<Integer> numbers = Arrays.asList(3, 4, 5, 1, 2);
 
         Arrays.stream(numbers.toArray()).forEach(System.out::println);
+        System.out.println("--------分割--------");
+        numbers.forEach(System.out::println);
         // max and OptionalInt
         OptionalInt maxCalories = menu.stream().mapToInt(Dish::getCalories).max();
 
