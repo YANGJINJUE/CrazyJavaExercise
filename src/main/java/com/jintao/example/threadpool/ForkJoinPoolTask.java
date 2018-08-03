@@ -35,7 +35,7 @@ public class ForkJoinPoolTask {
 
 /**
  * ClassName: SumTask
- * Function: 继承抽象类RecursiveTask，通过返回的结果，来实现数组的多线程分段累累加
+ * Function: 继承抽象类RecursiveTask，通过返回的结果，来实现数组的多线程分段累加
  * RecursiveTask 具有返回值
  * date: 2018年8月3日 下午6:08:11
  *
