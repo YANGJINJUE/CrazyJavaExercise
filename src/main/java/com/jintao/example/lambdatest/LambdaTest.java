@@ -165,4 +165,23 @@ public class LambdaTest {
         List<Stream<String>> list2Result = list2.stream().map(item -> list3.stream().map(item2 -> item + " " + item2)).collect(Collectors.toList());
         List<String> list2Result2 = list2.stream().flatMap(item -> list3.stream().map(item2 -> item + " " + item2)).collect(Collectors.toList());
     }
+
+    @Test
+    public void testRemoveDuplicate() {
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("_id", i % 2 == 0 ? "aa" : "bb");
+            map.put("title", i + "aa");
+            list.add(map);
+        }
+        //去除队列里面的重复数据
+        List<Map<String, Object>> distinctList = list.stream().collect(
+                Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(m -> (String) m.get("_id")))),
+                        ArrayList::new));
+        int count = list.size() - distinctList.size();
+        if (count > 0) {
+            System.out.printf("去除重复数据%s条\n", count);
+        }
+    }
 }
